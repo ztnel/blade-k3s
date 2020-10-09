@@ -49,7 +49,13 @@ sudo ./rpiboot
 9. Flash the eMMC using `dd`. Install and use `pv` to track progress
 ```bash
 brew install pv
-pv hypriotos-rpi-v1.12.3.img | sudo dd bs=1m of=/dev/rdisk2
+```
+```bash
+ % pv hypriotos-rpi-v1.12.3.img | sudo dd bs=1m of=/dev/rdisk2
+1.27GiB 0:03:47 [5.72MiB/s] [===========================================================================================================================>] 100%            
+0+20800 records in
+0+20800 records out
+1363148800 bytes transferred in 227.435230 secs (5993569 bytes/sec)
 ```
 10. Copy your public ssh key for the nodes user-data configuration file
 ```bash
@@ -59,7 +65,37 @@ cat ~/.ssh/id_rsa.pub
 ```bash
 vi /Volumes/HypriotOS/user-data
 ```
+
+```yaml
+#cloud-config
+# vim: syntax=yaml
+#
+
+# Set your hostname here, the manage_etc_hosts will update the hosts file entries as well
+hostname: edit your hostname here
+manage_etc_hosts: true
+
+# You could modify this for your own user information
+users:
+  - name: pirate
+    gecos: "Hypriot Pirate"
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    groups: users,docker,video,input
+    plain_text_passwd: hypriot
+    lock_passwd: false
+    ssh_pwauth: true
+    chpasswd: { expire: false }
+    ssh_authorized_keys:
+      - paste your ssh rsa key here
+
+# # Set the locale of the system
+# locale: "en_US.UTF-8"
+...
+```
 12. Unmount the disk and remove the compute module from the SO-DIMM slot
 ```bash
 diskutil unmountDisk /dev/disk2
 ```
+13. Repeat for remaining compute modules.
+
