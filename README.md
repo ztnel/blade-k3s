@@ -1,8 +1,9 @@
 # K3S Blade Cluster on TuringPi
+Modified: 2020-10
 
 ## Navigation
 1. [Setup](#Setup)
-
+2. [Node Management](#node-management)
 
 ## Setup
 1. Set the first jumper closest to the micro-usb slave programmer port so that it is on the pin with the small triangle indicator. This sets the pinstate to eMMC flash mode. 
@@ -99,3 +100,22 @@ diskutil unmountDisk /dev/disk2
 ```
 13. Repeat for remaining compute modules.
 
+## Node Management
+Find your ip for your home network:
+```bash
+ % ifconfig
+...
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	options=400<CHANNEL_IO>
+	ether 8c:85:90:76:f4:35 
+	inet6 fe80::1c1e:71a8:4c56:5a14%en0 prefixlen 64 secured scopeid 0x5 
+	inet 192.168.2.11 netmask 0xffffff00 broadcast 192.168.2.255
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect
+	status: active
+...
+```
+Search your ip space for other connnected devices. You can filter by the expected hostnames:
+```bash
+nmap -sn 192.168.2.1/32 | grep 'master\|slave'
+```
