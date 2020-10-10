@@ -172,3 +172,29 @@ We are now ready to run the ansible playbook to install kubernetes on our cluste
 ```bash
 ansible-playbook site.yml -i inventory/my-cluster/hosts.ini
 ```
+
+### Kubectl
+Now that k3s is running on the cluster we want to be able to control the cluster. This is done using `kubectl`. First we need to copy the kube config file from the master node to our device:
+```bash
+scp hypriot@master.local:~/.kube/config ~/Documents/Cluster/.kube/blade-config
+```
+
+Next install kubectl using `homebrew`:
+```bash
+brew install kubectl
+```
+
+To verify the k3s install across all nodes run the kubectl test on our client config file:
+```bash
+export KUBECONFIG=~/Documents/Cluster/.kube/blade-config
+kubectl version -client
+```
+This command should identify a client and a server :
+```
+```
+
+Now you can check the status of the cluster by running:
+```bash
+ % kubectl get nodes
+
+```
