@@ -100,6 +100,16 @@ diskutil unmountDisk /dev/disk2
 ```
 13. Repeat for remaining compute modules.
 
+### Notes on Reflashing
+In order to make the compute module discoverable to your computer the TuringPi must be power cycled with the slave usb flash port jumper set and the compute module in the master SO-DIMM slot.You can run `lsusb` to check just to be sure the device is discoverable.
+
+```bash
+ % lsusb
+...
+Bus 020 Device 000: ID 0a5c:2764 Broadcom Corp. BCM2710 Boot
+...
+```
+
 ## Node Management
 Find your ip for your home network:
 ```bash
