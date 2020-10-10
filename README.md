@@ -141,15 +141,15 @@ Clone the `k3s-ansible` repository by rancher and create a copy of the sample di
 git clone https://github.com/rancher/k3s-ansible.git
 cp -R inventory/sample inventory/cluster-name
 ```
-Edit the `host.ini` and specify your device master and nodes by their hostnames or IP addresses:
+Edit the `host.ini` and specify your device master and nodes by their hostnames or IP addresses (I found IPs worked better)
 ```ini
 [master]
-hypriot@master.local
+192.168.2.20
 
 [node]
-hypriot@slave-1.local
-hypriot@slave-2.local
-hypriot@slave-3.local
+192.168.2.22
+192.168.2.21
+192.168.2.23
 ...
 
 [k3s_cluster:children]
@@ -170,7 +170,7 @@ extra_agent_args: ""
 
 We are now ready to run the ansible playbook to install kubernetes on our cluster:
 ```bash
-ansible-playbook site.yml -i inventory/my-cluster/hosts.ini
+ansible-playbook site.yml -i inventory/my-cluster/hosts.ini -vv
 ```
 
 ### Kubectl
@@ -186,15 +186,21 @@ brew install kubectl
 
 To verify the k3s install across all nodes run the kubectl test on our client config file:
 ```bash
-export KUBECONFIG=~/Documents/Cluster/.kube/blade-config
-kubectl version -client
+ % export KUBECONFIG=~/Documents/Cluster/.kube/blade-config
+ % kubectl version
 ```
 This command should identify a client and a server :
 ```
+Client Version: version.Info{Major:"1", Minor:"19", GitVersion:"v1.19.2", GitCommit:"f5743093fd1c663cb0cbc89748f730662345d44d", GitTreeState:"clean", BuildDate:"2020-09-16T21:51:49Z", GoVersion:"go1.15.2", Compiler:"gc", Platform:"darwin/amd64"}
+Server Version: version.Info{Major:"1", Minor:"17", GitVersion:"v1.17.5+k3s1", GitCommit:"58ebdb2a2ec5318ca40649eb7bd31679cb679f71", GitTreeState:"clean", BuildDate:"2020-05-06T23:42:31Z", GoVersion:"go1.13.8", Compiler:"gc", Platform:"linux/arm"}
 ```
 
 Now you can check the status of the cluster by running:
 ```bash
  % kubectl get nodes
-
+NAME      STATUS   ROLES    AGE    VERSION
+master    Ready    master   15h    v1.17.5+k3s1
+slave-2   Ready    <none>   131m   v1.17.5+k3s1
+slave-3   Ready    <none>   131m   v1.17.5+k3s1
+slave-1   Ready    <none>   131m   v1.17.5+k3s1
 ```
