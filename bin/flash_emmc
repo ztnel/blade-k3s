@@ -26,7 +26,7 @@ echo -e "${OKBLUE}Starting eMMC Flashing Service ${ENDC}"
 
 echo "Initiating bootloader ... "
 cd usbboot
-sudo ./rpiboot -d msd -v
+sudo ./rpiboot -v
 cd ..
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
