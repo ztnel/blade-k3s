@@ -1,0 +1,5 @@
+pv
+libusb
+lsusb
+ansible
+kubectl
