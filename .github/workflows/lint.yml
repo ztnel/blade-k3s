@@ -6,7 +6,7 @@ name: Lint
       - master
 
 jobs:
-  test:
+  yaml-lint:
     name: YAML Lint
     runs-on: ubuntu-latest
 
@@ -24,3 +24,17 @@ jobs:
 
       - name: Run yamllint.
         run: yamllint user-data
+  
+  shell-lint:
+    name: Shellcheck
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Check out the codebase.
+          uses: actions/checkout@v2
+
+        - name: Install test dependencies.
+          run: apt install shellcheck -y
+
+        - name: Run yaml lint.
+          run: shellcheck bin/*
