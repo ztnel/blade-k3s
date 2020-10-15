@@ -7,7 +7,7 @@ OKBLUE='\033[94m'
 UNDERLINE='\033[4m'
 ENDC='\033[0m'
 
-echo "Starting eMMC Flashing Service"
+set -e
 
 if [ $# -ne 1 ]; then
     echo "$0": "usage: ./flash_emmc.sh [ PATH_TO_IMG ]"
@@ -15,16 +15,25 @@ if [ $# -ne 1 ]; then
 fi
 
 img=$1
+echo -e "${OKGREEN} Please verify the following: ${ENDC}"
+echo " 1. The turingpi is ON"
+echo " 2. The turingpi USB flash slave jumper is set"
+echo " 3. This local machine is set Slave micro usb flash port is connected to "
+
+read -p "Press any key to continue ..."
+echo "Insert compute module into master SO-DIMM slot."
+read -p "Press any key to continue ..."
+
+echo "${OKBLUE} Starting eMMC Flashing Service ${ENDC}"
+
 echo "Searching for BCM devices on USB ..."
-if [[ $(lsusb | grep BCM) -ne 0 ]]; then
-    echo -e "${FAIL} ✘ ${ENDC} failed: could not find BCM device on USB."
-    exit 1
-fi
+# FIXME check and fail if BCM device is not found
+timeout 15s watch -n 0.1 lsusb
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 echo "Sending boot code ..."
 cd usbboot
-timeout 10s sudo ./rpiboot
+sudo ./rpiboot
 cd ..
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
