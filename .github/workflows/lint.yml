@@ -36,5 +36,5 @@ jobs:
       - name: Install test dependencies.
         run: sudo apt install shellcheck -y
 
-      - name: Run yaml lint.
+      - name: Run shellcheck linter.
         run: shellcheck bin/*
