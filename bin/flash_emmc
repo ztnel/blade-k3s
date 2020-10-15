@@ -21,23 +21,17 @@ echo " 2. The turingpi USB flash slave jumper is set"
 echo " 3. This local machine is set Slave micro usb flash port is connected to "
 
 read -p "Press any key to continue ..."
-echo "Insert compute module into master SO-DIMM slot."
-read -p "Press any key to continue ..."
 
-echo "${OKBLUE} Starting eMMC Flashing Service ${ENDC}"
+echo -e "${OKBLUE}Starting eMMC Flashing Service ${ENDC}"
 
-echo "Searching for BCM devices on USB ..."
-# FIXME check and fail if BCM device is not found
-timeout 15s watch -n 0.1 lsusb
-echo -e "${OKGREEN} ✓ ${ENDC} complete"
-
-echo "Sending boot code ..."
+echo "Initiating bootloader ... "
 cd usbboot
-sudo ./rpiboot
+sudo ./rpiboot -d msd -v
 cd ..
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
-timeout 5s watch -n 0.1 diskutil list
+sleep 2
+diskutil list
 read -rp 'Specify disk write location (ie /dev/disk2): ' disk
 echo "Unmounting $disk ..."
 diskutil unmountDisk "$disk"
