@@ -1,8 +1,9 @@
-#cloud-config
+---
+# cloud-config
 # vim: syntax=yaml
 #
 
-# Set your hostname here, the manage_etc_hosts will update the hosts file entries as well
+# Set your hostname here, manage_etc_hosts will update the hosts file entries
 hostname: black-pearl
 manage_etc_hosts: true
 
@@ -16,7 +17,7 @@ users:
     plain_text_passwd: hypriot
     lock_passwd: false
     ssh_pwauth: true
-    chpasswd: { expire: false }
+    chpasswd: {expire: false}
 
 # # Set the locale of the system
 # locale: "en_US.UTF-8"
