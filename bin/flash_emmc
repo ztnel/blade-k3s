@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 OKGREEN='\033[92m'
 # WARNING='\033[93m'
 FAIL='\033[91m'
@@ -25,10 +23,12 @@ fi
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 echo "Sending boot code ..."
-sudo ./rpiboot
+cd usbboot
+timeout 10s sudo ./rpiboot
+cd ..
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
-diskutil list
+timeout 5s watch -n 0.1 diskutil list
 read -rp 'Specify disk write location (ie /dev/disk2): ' disk
 echo "Unmounting $disk ..."
 diskutil unmountDisk "$disk"
