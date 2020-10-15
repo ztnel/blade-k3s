@@ -20,12 +20,12 @@ echo " 1. The turingpi is ON"
 echo " 2. The turingpi USB flash slave jumper is set"
 echo " 3. This local machine is set Slave micro usb flash port is connected to "
 
-read -p "Press any key to continue ..."
+read -rp "Press any key to continue ..."
 
 echo -e "${OKBLUE}Starting eMMC Flashing Service ${ENDC}"
 
 echo "Initiating bootloader ... "
-cd usbboot
+cd usbboot || exit
 sudo ./rpiboot -v
 cd ..
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
@@ -41,7 +41,7 @@ pv "$img" | sudo dd bs=1m of="$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 echo "Copying public ssh key to buffer ... "
-cat ~/.ssh/id_rsa.pub | pbcopy
+cmd < ~/.ssh/id_rsa.pub | pbcopy
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 echo "Opening node user data ..."
 vi /Volumes/HypriotOS/user-data

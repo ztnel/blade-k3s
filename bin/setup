@@ -8,7 +8,7 @@ UNDERLINE='\033[4m'
 ENDC='\033[0m'
 
 echo "Installing dependancies ..."
-cat dependencies.txt | xargs brew install
+cmd < dependencies.txt | xargs brew install
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 echo "Preparing usbboot submodule ..."
