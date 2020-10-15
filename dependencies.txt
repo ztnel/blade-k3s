@@ -3,3 +3,4 @@ libusb
 lsusb
 ansible
 kubectl
+watch
