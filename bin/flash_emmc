@@ -15,7 +15,7 @@ if [ $# -ne 1 ]; then
 fi
 
 img=$1
-echo -e "${OKGREEN} Please verify the following: ${ENDC}"
+echo -e "${UNDERLINE} Please verify the following: ${ENDC}"
 echo " 1. The turingpi is ON"
 echo " 2. The turingpi USB flash slave jumper is set"
 echo " 3. This local machine is set Slave micro usb flash port is connected to "
