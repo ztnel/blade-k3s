@@ -8,7 +8,7 @@ OKGREEN='\033[92m'
 ENDC='\033[0m'
 
 echo "Installing dependancies ..."
-cmd < dependencies.txt | xargs brew install
+xargs brew install < dependencies.txt
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 echo "Preparing usbboot submodule ..."

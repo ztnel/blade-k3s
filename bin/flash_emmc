@@ -41,7 +41,7 @@ pv "$img" | sudo dd bs=1m of="$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 echo "Copying public ssh key to buffer ... "
-cmd < ~/.ssh/id_rsa.pub | pbcopy
+pbcopy < ~/.ssh/id_rsa.pub
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 echo "Opening node user data ..."
 vi /Volumes/HypriotOS/user-data
