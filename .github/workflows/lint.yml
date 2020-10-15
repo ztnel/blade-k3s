@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install test dependencies.
-        run: apt install shellcheck -y
+        run: sudo apt install shellcheck -y
 
       - name: Run yaml lint.
         run: shellcheck bin/*
