@@ -9,12 +9,6 @@ ENDC='\033[0m'
 
 set -e
 
-if [ $# -ne 1 ]; then
-    echo "$0": "usage: ./flash_emmc.sh [ PATH_TO_IMG ]"
-    exit 0
-fi
-
-img=$1
 echo -e "${UNDERLINE} Please verify the following: ${ENDC}"
 echo " 1. The turingpi is ON"
 echo " 2. The turingpi USB flash slave jumper is set"
@@ -36,9 +30,13 @@ read -rp 'Specify disk write location (ie /dev/disk2): ' disk
 echo "Unmounting $disk ..."
 diskutil unmountDisk "$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
-echo "Flashing $img to $disk..."
+
+cd build || exit
+img=$(ls | grep *.img)
+echo "Flashing $img to $disk ..."
 pv "$img" | sudo dd bs=1m of="$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
+cd - || exit
 
 echo "Copying public ssh key to buffer ... "
 pbcopy < ~/.ssh/id_rsa.pub
