@@ -1,7 +1,6 @@
 # TuringPi K3S Cluster Setup HybriotOS
 [![Actions Status](https://github.com/cSDes1gn/blade-k3s/workflows/yaml-lint/badge.svg)](https://github.com/cSDes1gn/blade-k3s/actions) [![Actions Status](https://github.com/cSDes1gn/blade-k3s/workflows/shellcheck/badge.svg)](https://github.com/cSDes1gn/blade-k3s/actions)
 
-
 ![img](img/tp.jpeg) ![img](img/logo_tr.png)![img](img/k3s.png) 
 
 Modified: 2020-10
