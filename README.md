@@ -1,4 +1,4 @@
-# Automation for TuringPi K3S Blade Cluster using HybriotOS
+# Automation for TuringPi K3S Blade Cluster using HypriotOS
 [![Actions Status](https://github.com/cSDes1gn/blade-k3s/workflows/yaml-lint/badge.svg)](https://github.com/cSDes1gn/blade-k3s/actions) [![Actions Status](https://github.com/cSDes1gn/blade-k3s/workflows/shellcheck/badge.svg)](https://github.com/cSDes1gn/blade-k3s/actions)
 
 ![img](docs/img/tp.jpeg) ![img](docs/img/logo_tr.png)![img](docs/img/k3s.png) 
