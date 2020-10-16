@@ -6,30 +6,41 @@
 Modified: 2020-10
 
 ## Navigation
-1. [Automating Cluster Setup](#Automated-F)
-2. [Setup](#Setup)
-3. [Quick Start](#Quickstart)
-4. [Node Management](#node-management)
-
+- [TuringPi K3S Cluster Setup HybriotOS](#turingpi-k3s-cluster-setup-hybriotos)
+  - [Navigation](#navigation)
+  - [Automating Cluster Setup](#automating-cluster-setup)
+  - [TuringPi Setup](#turingpi-setup)
+  - [Quickstart](#quickstart)
+  - [License](#license)
 
 ## Automating Cluster Setup
 
 Downloading dependancies, flashing compute modules, setting up custom node configs are all tedious and time consuming processes. This repository leverages automation for faster and more consistent setup results for turingpi 
 
+## TuringPi Setup
+1. Set the first jumper closest to the micro-usb slave programmer port so that it is on the pin with the small triangle indicator. This sets the pinstate to eMMC flash mode. 
+2. Connect micro-usb to your local machine
+3. Insert eMMC compute module into the master SO-DIMM slot
+4. Power TuringPi using 12V VDC in or mini-ITX power cable
+
 ## Quickstart
-Clone and run `make` following the prompts for hardware interactions:
+Clone and run setup to generate build artefacts:
 ```bash
 git clone --recurse-submodules https://github.com/cSDes1gn/blade-k3s
-make
 ```
-
-This will create a `build` directory containing the latest HypriotOS image. To remove the build directory and perform other cleanup:
+```bash
+make setup
+```
+This will create a `build` directory build artefacts. To remove the build directory after flashing nodes and perform other cleanup:
 ```bash
 make clean
 ```
+Prepare TuringPi board for slave port flashing as per [instructions](#turingpi-setup) then run following the prompts:
+```bash
+make flash
+```
 
-## Setup
-1. Set the first jumper closest to the micro-usb slave programmer port so that it is on the pin with the small triangle indicator. This sets the pinstate to eMMC flash mode. 
-2. Connect micro-usb to computer
-3. Insert eMMC compute module into the master SO-DIMM slot
-4. Power TuringPi using 12V VDC in or mini-ITX power cable
+## License
+
+
+
