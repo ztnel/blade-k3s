@@ -1,0 +1,21 @@
+name: shellcheck
+'on':
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  shell-lint:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Install test dependencies.
+        run: sudo apt install shellcheck -y
+
+      - name: Run shellcheck linter.
+        run: shellcheck bin/*
