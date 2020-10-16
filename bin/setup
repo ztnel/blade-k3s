@@ -7,6 +7,13 @@ OKGREEN='\033[92m'
 # UNDERLINE='\033[4m'
 ENDC='\033[0m'
 
+# fetch latest download url from github api payload 
+get_latest_release() {
+  download=$(curl $1 | jq --raw-output '.assets | .[0] | .browser_download_url')
+  echo "Downloading latest Hypriot from: $download"
+  curl -L "$download" --output hypriot-latest.tar
+}
+
 echo "Installing dependancies ..."
 xargs brew install < dependencies.txt
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
@@ -17,4 +24,8 @@ echo "Syncing with usbboot remote"
 git submodule update --remote
 cd usbboot || exit
 make
+echo -e "${OKGREEN} ✓ ${ENDC} complete"
+
+echo "Fetching latest HypriotOS release ..."
+get_latest_release "https://api.github.com/repos/hypriot/image-builder-rpi/releases/latest"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
