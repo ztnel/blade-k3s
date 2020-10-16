@@ -1,9 +1,18 @@
 # K3S Blade Cluster on TuringPi
+[![Actions Status](https://github.com/cSDes1gn/blade-k3s/workflows/yaml-lint/badge.svg)](https://github.com/cSDes1gn/blade-k3s/actions) [![Actions Status](https://github.com/cSDes1gn/blade-k3s/workflows/shellcheck/badge.svg)](https://github.com/cSDes1gn/blade-k3s/actions)
+
+
+<!-- ![img](img/tp.jpeg) ![img](img/k3s.png) -->
+
 Modified: 2020-10
 
 ## Navigation
 1. [Setup](#Setup)
-2. [Node Management](#node-management)
+2. [Quick Start](#Quickstart)
+3. [Node Management](#node-management)
+
+## Quickstart
+
 
 ## Setup
 1. Set the first jumper closest to the micro-usb slave programmer port so that it is on the pin with the small triangle indicator. This sets the pinstate to eMMC flash mode. 
