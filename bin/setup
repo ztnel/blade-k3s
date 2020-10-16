@@ -1,5 +1,5 @@
 #!/bin/bash
-
+NAME=hypriot-latest
 OKGREEN='\033[92m'
 # WARNING='\033[93m'
 # FAIL='\033[91m'
@@ -9,9 +9,16 @@ ENDC='\033[0m'
 
 # fetch latest download url from github api payload 
 get_latest_release() {
-  download=$(curl $1 | jq --raw-output '.assets | .[0] | .browser_download_url')
+  mkdir build
+  download=$(curl "$1" | jq --raw-output '.assets | .[0] | .browser_download_url')
   echo "Downloading latest Hypriot from: $download"
-  curl -L "$download" --output hypriot-latest.tar
+  curl -L "$download" --output build/"$NAME".tgz
+}
+
+build(){
+  cd build || exit
+  tar -xvf "$NAME".tgz
+  cd - || exit
 }
 
 echo "Installing dependancies ..."
@@ -28,4 +35,8 @@ echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 echo "Fetching latest HypriotOS release ..."
 get_latest_release "https://api.github.com/repos/hypriot/image-builder-rpi/releases/latest"
+echo -e "${OKGREEN} ✓ ${ENDC} complete"
+
+echo "Extracting HypriotOS img ..."
+build
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
