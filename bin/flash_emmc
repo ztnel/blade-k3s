@@ -32,7 +32,7 @@ diskutil unmountDisk "$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 cd build || exit
-img=$(echo -- *'.md'*)
+img=$(echo -- *'.img'*)
 echo "Flashing $img to $disk ..."
 pv "$img" | sudo dd bs=1m of="$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
