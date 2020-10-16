@@ -6,12 +6,10 @@
 Modified: 2020-10
 
 ## Navigation
-- [Automation for TuringPi K3S Blade Cluster using HybriotOS](#automation-for-turingpi-k3s-blade-cluster-using-hybriotos)
-  - [Navigation](#navigation)
-  - [Automating Cluster Setup](#automating-cluster-setup)
-  - [TuringPi Setup](#turingpi-setup)
-  - [Quickstart](#quickstart)
-  - [License](#license)
+1. [Automating Cluster Setup](#automating-cluster-setup)
+2. [TuringPi Setup](#turingpi-setup)
+3. [Quickstart](#quickstart)
+4. [License](#license)
 
 ## Automating Cluster Setup
 
