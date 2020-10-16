@@ -2,12 +2,11 @@
 all : setup flash
 
 .PHONY: setup
-setup: ## install packages and init and sync submodules
+setup: ## install packages, init and sync submodules, fetch and extract latest hypriotOS img
 	./bin/setup
 
 .PHONY: flash
-flash: ## flash compute module eMMC with specified OS image
-	@if [[ "$(img)" -ne 0 ]]; then exit 1; fi
+flash: ## flash compute module eMMC with latest hypriotOS img
 	./bin/flash_emmc $(img)
 
 .PHONY: help	
