@@ -1,2 +1,5 @@
 *.diff
 .DS_Store
+
+# img file
+hypriot-latest.tar
