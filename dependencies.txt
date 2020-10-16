@@ -4,3 +4,4 @@ lsusb
 ansible
 kubectl
 watch
+jq
