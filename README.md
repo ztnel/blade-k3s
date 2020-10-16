@@ -1,4 +1,4 @@
-# TuringPi K3S Cluster Setup HybriotOS
+# Automation for TuringPi K3S Blade Cluster using HybriotOS
 [![Actions Status](https://github.com/cSDes1gn/blade-k3s/workflows/yaml-lint/badge.svg)](https://github.com/cSDes1gn/blade-k3s/actions) [![Actions Status](https://github.com/cSDes1gn/blade-k3s/workflows/shellcheck/badge.svg)](https://github.com/cSDes1gn/blade-k3s/actions)
 
 ![img](docs/img/tp.jpeg) ![img](docs/img/logo_tr.png)![img](docs/img/k3s.png) 
@@ -6,7 +6,7 @@
 Modified: 2020-10
 
 ## Navigation
-- [TuringPi K3S Cluster Setup HybriotOS](#turingpi-k3s-cluster-setup-hybriotos)
+- [Automation for TuringPi K3S Blade Cluster using HybriotOS](#automation-for-turingpi-k3s-blade-cluster-using-hybriotos)
   - [Navigation](#navigation)
   - [Automating Cluster Setup](#automating-cluster-setup)
   - [TuringPi Setup](#turingpi-setup)
@@ -41,6 +41,6 @@ make flash
 ```
 
 ## License
-
+[GNU General Public License v3.0](#LICENSE)
 
 
