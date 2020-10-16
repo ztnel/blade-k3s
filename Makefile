@@ -7,7 +7,11 @@ setup: ## install packages, init and sync submodules, fetch and extract latest h
 
 .PHONY: flash
 flash: ## flash compute module eMMC with latest hypriotOS img
-	./bin/flash_emmc $(img)
+	./bin/flash_emmc
+
+.PHONY: clean
+flash: ## clean build artifacts
+	@rm -rv build
 
 .PHONY: help	
 help:
