@@ -4,12 +4,12 @@
 #
 
 # Set your hostname here, manage_etc_hosts will update the hosts file entries
-hostname: black-pearl
+hostname: ${HOSTNAME:black-pearl}
 manage_etc_hosts: true
 
 # You could modify this for your own user information
 users:
-  - name: pirate
+  - name: ${USER:pirate}
     gecos: "Hypriot Pirate"
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
@@ -18,6 +18,8 @@ users:
     lock_passwd: false
     ssh_pwauth: true
     chpasswd: {expire: false}
+    ssh_authorized_keys:
+      - ${PUB_SSH}
 
 # # Set the locale of the system
 # locale: "en_US.UTF-8"
