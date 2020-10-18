@@ -23,5 +23,5 @@ jobs:
         run: python3 -m pip install yamllint
 
       - name: Run yamllint.
-        run: yamllint user-data
+        run: yamllint ./src/templates
   
