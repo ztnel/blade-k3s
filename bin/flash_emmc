@@ -45,12 +45,17 @@ if [[ ! $REPLY =~ ^[Yy]$ ]] then
     echo "Finding public ssh key ... "
     export PUB_SSH=$(< ~/.ssh/id_rsa.pub)
     echo -e "${OKGREEN} ✓ ${ENDC} complete"
-    mv 
+    yaml='.user-data-auth-ssh.yaml'
 else
     echo "Skipping ssh authorization setup"
+    yaml='user-data.yaml'
 fi
 echo "Configuring user data template ... "
-
+python src/yaml_parser.py "./src/templates/$yaml"
+echo -e "${OKGREEN} ✓ ${ENDC} complete"
+cfg_path='/Volumes/HypriotOS/user-data'
+echo "Copying to $cfg_path ... "
+cp "$BUILD/user-data" "$cfg_path"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 diskutil unmountDisk "$disk"
