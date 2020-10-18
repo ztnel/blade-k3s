@@ -34,7 +34,8 @@ echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 echo "Preparing build ... "
 mkdir build
-export BUILD="$(cd build || exit; pwd -P)"
+build_path="$(cd build || exit; pwd -P)"
+export BUILD="$build_path"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 echo "Fetching latest HypriotOS release ..."

@@ -41,9 +41,11 @@ cd - || exit
 
 read -rp "Would you like to setup ssh key authorization with your machine to this node? (y/n)" -n 1 -r
 echo
-if [[ ! $REPLY =~ ^[Yy]$ ]] then
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     echo "Finding public ssh key ... "
-    export PUB_SSH=$(< ~/.ssh/id_rsa.pub)
+    # assignment and declaration seperate to maintain set -e and traps.
+    key=$(< ~/.ssh/id_rsa.pub)
+    export PUB_SSH="$key"
     echo -e "${OKGREEN} ✓ ${ENDC} complete"
     yaml='.user-data-auth-ssh.yaml'
 else
