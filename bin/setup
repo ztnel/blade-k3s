@@ -9,14 +9,13 @@ ENDC='\033[0m'
 
 # fetch latest download url from github api payload 
 get_latest_release() {
-  mkdir build
   download=$(curl "$1" | jq --raw-output '.assets | .[0] | .browser_download_url')
   echo "Downloading latest Hypriot from: $download"
   curl -L "$download" --output build/"$NAME".tgz
 }
 
 build(){
-  cd build || exit
+  cd "$BUILD" || exit
   tar -xvf "$NAME".tgz
   cd - || exit
 }
@@ -31,6 +30,11 @@ echo "Syncing with usbboot remote"
 git submodule update --remote
 cd usbboot || exit
 make
+echo -e "${OKGREEN} ✓ ${ENDC} complete"
+
+echo "Preparing build ... "
+mkdir build
+export BUILD="$(cd build || exit; pwd -P)"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 echo "Fetching latest HypriotOS release ..."
