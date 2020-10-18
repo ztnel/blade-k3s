@@ -1,4 +1,3 @@
-#!/
 # -*- coding: utf-8 -*-
 """
 SafeLoad YAML Parser
@@ -15,7 +14,6 @@ test.yaml:
                  env var    default
     ...
 If the environment variable cannot be found a default value can be specified as a fallback.
-
 """
 
 import logging
@@ -44,8 +42,6 @@ def path_constructor(loader:yaml.loader.SafeLoader, node:yaml.nodes.ScalarNode) 
         var = env_var[1] + value[match.end():]
     return var
 
-
-
 path_matcher = re.compile(r'\$\{([^}^{]+)\}')
 yaml.add_implicit_resolver('!path', path_matcher, None, yaml.loader.SafeLoader)
 yaml.add_constructor('!path', path_constructor, yaml.loader.SafeLoader)
@@ -63,6 +59,5 @@ with open(sys.argv[1], 'r') as stream:
         logging.info('Saving to build directory')
         with open(os.environ['BUILD']+'/user-data', 'w') as outstream:
             yaml.dump(user_cfg, outstream, default_flow_style=False)
-        
     logging.info('Yaml parse complete')
     
