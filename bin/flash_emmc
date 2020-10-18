@@ -12,7 +12,7 @@ set -e
 echo -e "${UNDERLINE} Please verify the following: ${ENDC}"
 echo " 1. The turingpi is ON"
 echo " 2. The turingpi USB flash slave jumper is set"
-echo " 3. This local machine is set Slave micro usb flash port is connected to "
+echo " 3. This local machine is connected to the slave micro usb flash port."
 
 read -rp "Press any key to continue ..."
 
@@ -20,6 +20,7 @@ echo -e "${OKBLUE}Starting eMMC Flashing Service ${ENDC}"
 
 echo "Initiating bootloader ... "
 cd usbboot || exit
+echo "Insert compute module into master SO-DIMM"
 sudo ./rpiboot -v
 cd ..
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
@@ -38,11 +39,19 @@ pv "$img" | sudo dd bs=1m of="$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 cd - || exit
 
-echo "Copying public ssh key to buffer ... "
-pbcopy < ~/.ssh/id_rsa.pub
+read -rp "Would you like to setup ssh key authorization with your machine to this node? (y/n)" -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]] then
+    echo "Finding public ssh key ... "
+    export PUB_SSH=$(< ~/.ssh/id_rsa.pub)
+    echo -e "${OKGREEN} ✓ ${ENDC} complete"
+    mv 
+else
+    echo "Skipping ssh authorization setup"
+fi
+echo "Configuring user data template ... "
+
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
-echo "Opening node user data ..."
-vi /Volumes/HypriotOS/user-data
 
 diskutil unmountDisk "$disk"
 
