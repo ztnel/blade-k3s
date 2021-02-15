@@ -3,7 +3,7 @@
 
 ![img](docs/img/tp.jpeg) ![img](docs/img/logo_tr.png)![img](docs/img/k3s.png) 
 
-Modified: 2020-10
+Modified: 2021-02
 
 ## Navigation
 1. [Automating Cluster Setup](#automating-cluster-setup)
@@ -13,13 +13,12 @@ Modified: 2020-10
 
 ## Automating Cluster Setup
 
-Downloading dependancies, flashing compute modules, setting up custom node configs are all tedious and time consuming processes. This repository leverages automation for faster and more consistent setup results for turingpi 
+Downloading dependancies, flashing compute modules, setting up custom node configs are all tedious and time consuming processes. This repository leverages automation for faster and more consistent setup results for TuringPi clusters. 
 
 ## TuringPi Setup
-1. Set the first jumper closest to the micro-usb slave programmer port so that it is on the pin with the small triangle indicator. This sets the pinstate to eMMC flash mode. 
-2. Connect micro-usb to your local machine
-3. Insert eMMC compute module into the master SO-DIMM slot
-4. Power TuringPi using 12V VDC in or mini-ITX power cable
+1. Remove all compute modules from the SO-DIMM slots if present
+2. Set the first jumper closest to the micro-usb slave programmer port so that it is on the pin with the small triangle indicator. This sets the pinstate to eMMC flash mode. 
+3. Connect micro-usb to your local machine
 
 ## Quickstart
 Clone and run setup to generate build artefacts:
