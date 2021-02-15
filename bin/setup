@@ -31,7 +31,7 @@ git submodule update --remote
 cd usbboot || exit
 make
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
-
+cd .. || exit
 echo "Preparing build ... "
 mkdir build
 build_path="$(cd build || exit; pwd -P)"
