@@ -7,7 +7,7 @@ echo " 1. The turingpi is OFF"
 echo " 2. The turingpi USB flash slave jumper is set"
 echo " 3. This local machine is connected to the slave micro usb flash port."
 
-read -rp "Press any key to continue ..."
+read -rp "Insert compute module into master SO-DIMM slot then press Enter"
 
 echo -e "${OKBLUE}Starting eMMC Flashing Service ${ENDC}"
 

@@ -1,5 +1,4 @@
 #!/bin/bash
-NAME=hypriot-latest
 OKGREEN='\033[92m'
 # WARNING='\033[93m'
 # FAIL='\033[91m'
@@ -11,12 +10,12 @@ ENDC='\033[0m'
 get_latest_release() {
   download=$(curl "$1" | jq --raw-output '.assets | .[0] | .browser_download_url')
   echo "Downloading latest Hypriot from: $download"
-  curl -L "$download" --output build/"$NAME".tgz
+  curl -L "$download" --output build/"$IMG_NAME".tgz
 }
 
 build(){
   cd "$BUILD" || exit
-  tar -xvf "$NAME".tgz
+  tar -xvf "$IMG_NAME".tgz
   cd - || exit
 }
 
