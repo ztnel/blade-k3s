@@ -6,7 +6,6 @@ OKGREEN='\033[92m'
 OKBLUE='\033[94m'
 UNDERLINE='\033[4m'
 ENDC='\033[0m'
-
 set -e
 
 echo -e "${UNDERLINE} Please verify the following: ${ENDC}"
@@ -48,10 +47,10 @@ if [ "$REPLY" == "y" ]; then
     fi
     
     # assignment and declaration seperate to maintain set -e and traps.
-    key=$(< "$SSH_KEY_PATH")
+    key=$(< $SSH_KEY_PATH)
     export PUB_SSH="$key"
     echo -e "${OKGREEN} ✓ ${ENDC} complete"
-    yaml='.user-data-auth-ssh.yaml'
+    yaml='user-data-ssh-auth.yaml'
 else
     echo "Skipping ssh authorization setup"
     yaml='user-data.yaml'
