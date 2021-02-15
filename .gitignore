@@ -1,6 +1,6 @@
 *.diff
 .DS_Store
-./build
+build/*
 
 # img file
 hypriot-latest.tar
