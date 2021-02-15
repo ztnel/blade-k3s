@@ -32,13 +32,13 @@ pv "$img" | sudo dd bs=1m of="$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 cd - || exit
 
-if [ -n "$PUB_SSH" ]; then
-    echo -e "${OKGREEN} ✓ ${ENDC} complete"
-    yaml='user-data-ssh-auth.yaml'
-else
-    echo "Skipping ssh authorization setup"
-    yaml='user-data.yaml'
-fi
+# if [ -n "$PUB_SSH" ]; then
+#     echo "Using ssh authorization template"
+#     yaml='user-data-ssh-auth.yaml'
+# else
+#     echo "Skipping ssh authorization setup"
+#     yaml='user-data.yaml'
+# fi
 
 # read -rp "Set hostname: " TURINGPI_HOSTNAME
 # export TURINGPI_HOSTNAME
