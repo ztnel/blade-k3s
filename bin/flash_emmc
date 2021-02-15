@@ -48,7 +48,7 @@ if [ "$REPLY" == "y" ]; then
     fi
     
     # assignment and declaration seperate to maintain set -e and traps.
-    key=$(< ~"$SSH_KEY_PATH")
+    key=$(< "$SSH_KEY_PATH")
     export PUB_SSH="$key"
     echo -e "${OKGREEN} ✓ ${ENDC} complete"
     yaml='.user-data-auth-ssh.yaml'
