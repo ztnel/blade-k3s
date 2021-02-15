@@ -10,7 +10,7 @@ flash: ## flash compute module eMMC with latest hypriotOS img
 	./bin/flash_emmc
 
 .PHONY: clean
-flash: ## clean build artifacts
+clean: ## clean build artifacts
 	@rm -rv build
 
 .PHONY: help	
