@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 set -e
 
@@ -26,23 +26,13 @@ diskutil unmountDisk "$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 cd build || exit
-img=\*.img
+img=$(echo *'.img')
 echo "Flashing $img to $disk ..."
 pv "$img" | sudo dd bs=1m of="$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 cd - || exit
 
-read -rp "Would you like to setup ssh key authorization with your machine to this node? (y/n)" REPLY
-if [ "$REPLY" == "y" ]; then
-    read -rp "Path to pub ssh key: " SSH_KEY_PATH
-    if [ "$SSH_KEY_PATH" == "" ]; then
-        SSH_KEY_PATH="\~/.ssh/id_rsa.pub"
-        echo "Using native path to local pub key: $SSH_KEY_PATH"
-    fi
-    
-    # assignment and declaration seperate to maintain set -e and traps.
-    key=$(< $SSH_KEY_PATH)
-    export PUB_SSH="$key"
+if [ -n "$PUB_SSH" ]; then
     echo -e "${OKGREEN} ✓ ${ENDC} complete"
     yaml='user-data-ssh-auth.yaml'
 else
