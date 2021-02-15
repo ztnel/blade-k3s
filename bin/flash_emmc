@@ -39,12 +39,16 @@ pv "$img" | sudo dd bs=1m of="$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 cd - || exit
 
-read -rp "Would you like to setup ssh key authorization with your machine to this node? (y/n)" -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Finding public ssh key ... "
+read -rp "Would you like to setup ssh key authorization with your machine to this node? (y/n)" REPLY
+if [ "$REPLY" == "y" ]; then
+    read -rp "Path to pub ssh key: " SSH_KEY_PATH
+    if [ "$SSH_KEY_PATH" == "" ]; then
+        SSH_KEY_PATH="\~/.ssh/id_rsa.pub"
+        echo "Using native path to local pub key: $SSH_KEY_PATH"
+    fi
+    
     # assignment and declaration seperate to maintain set -e and traps.
-    key=$(< ~/.ssh/id_rsa.pub)
+    key=$(< ~"$SSH_KEY_PATH")
     export PUB_SSH="$key"
     echo -e "${OKGREEN} ✓ ${ENDC} complete"
     yaml='.user-data-auth-ssh.yaml'
@@ -53,7 +57,7 @@ else
     yaml='user-data.yaml'
 fi
 echo "Configuring user data template ... "
-python src/yaml_parser.py "./src/templates/$yaml"
+./src/yaml_parser.py "./src/templates/$yaml"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 cfg_path='/Volumes/HypriotOS/user-data'
 echo "Copying to $cfg_path ... "
