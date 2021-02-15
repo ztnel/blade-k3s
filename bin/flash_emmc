@@ -1,11 +1,5 @@
 #!/bin/bash
 
-OKGREEN='\033[92m'
-# WARNING='\033[93m'
-# FAIL='\033[91m'
-OKBLUE='\033[94m'
-UNDERLINE='\033[4m'
-ENDC='\033[0m'
 set -e
 
 echo -e "${UNDERLINE} Please verify the following: ${ENDC}"
@@ -32,7 +26,7 @@ diskutil unmountDisk "$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 cd build || exit
-img=$(echo -- *'.img'*)
+img=$(echo *'.img'*)
 echo "Flashing $img to $disk ..."
 pv "$img" | sudo dd bs=1m of="$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
