@@ -1,9 +1,9 @@
-#!/bin/bash -x
+#!/bin/bash
 
 set -e
 
 echo -e "${UNDERLINE} Please verify the following: ${ENDC}"
-echo " 1. The turingpi is ON"
+echo " 1. The turingpi is OFF"
 echo " 2. The turingpi USB flash slave jumper is set"
 echo " 3. This local machine is connected to the slave micro usb flash port."
 
@@ -13,7 +13,7 @@ echo -e "${OKBLUE}Starting eMMC Flashing Service ${ENDC}"
 
 echo "Initiating bootloader ... "
 cd usbboot || exit
-echo "Insert compute module into master SO-DIMM"
+echo "Please turn on the Turingpi"
 sudo ./rpiboot -v
 cd ..
 echo -e "${OKGREEN} ✓ ${ENDC} complete"
@@ -40,17 +40,17 @@ else
     yaml='user-data.yaml'
 fi
 
-read -rp "Set hostname: " TURINGPI_HOSTNAME
-export TURINGPI_HOSTNAME
+# read -rp "Set hostname: " TURINGPI_HOSTNAME
+# export TURINGPI_HOSTNAME
 
-echo "Configuring user data template ... "
-./src/yaml_parser.py "./src/templates/$yaml"
-echo -e "${OKGREEN} ✓ ${ENDC} complete"
-cfg_path='/Volumes/HypriotOS/user-data'
-echo "Copying to $cfg_path ... "
-cp "$BUILD/user-data" "$cfg_path"
-echo -e "${OKGREEN} ✓ ${ENDC} complete"
+# echo "Configuring user data template ... "
+# ./src/yaml_parser.py "./src/templates/$yaml"
+# echo -e "${OKGREEN} ✓ ${ENDC} complete"
+# cfg_path='/Volumes/HypriotOS/user-data'
+# echo "Copying to $cfg_path ... "
+# cp "$BUILD/user-data" "$cfg_path"
+# echo -e "${OKGREEN} ✓ ${ENDC} complete"
 
 diskutil unmountDisk "$disk"
-
+diskutil eject "$disk"
 echo -e "${OKGREEN} ✓ ${ENDC} Completed eMMC Flashing Service"
